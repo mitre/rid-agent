@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}Web API Integration Information{% endblock %}
+{% block header %}Web API Integration{% endblock %}
+{% block sidebar %}
+On this page:
+<ul>
+  <li><a href="#overview">Overview</a></li>
+  <li><a href="#workflow">Workflow</a></li>
+  <li><a href="#incoming">Incoming Messages</a></li>
+  <li><a href="#outgoing">Outgoing Messages</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<h2><a name="overview">Overview</a></h2>
+<p>The Web API is the mechanism through which backend systems integrate 
+with the RID Agent, specifically by hooking into the 
+<a href="/docs/message_store">message store</a> component. The full
+context for the message store is described in the 
+<a href="/docs/architecture">architecture</a> section.</p>
+
+<p>There are two message store URLs that any integration effort must
+know about: /msg/incoming/pull and /msg/outgoing/push. For human
+interaction through a browser, both of these urls can be accessed 
+by replacing pull or push with 'view':<br>
+<ul>
+ <li><a href="/msg/incoming/view">/msg/incoming/view</a></li>
+ <li><a href="/msg/outgoing/view/">/msg/outgoing/view</a></li>
+</ul>
+Note: If you have not sent or received any RID messages, these queues will be empty.
+You may choose to insert some Sample XML from the
+<a href="/docs/references">references</a> page, using the 
+<a href="/tools/add_incoming_message">add incoming message</a> tool.
+</p>
+<h2><a name="workflow">Workflows</a></h2>
+<p>
+<b>Receive and Respond</b><br>
+The workflow for a Receiving and responding to RID Message is as follows:
+<ol>
+  <li>A RID Message gets added to the RID Agent message store. This 
+  may be done through the <a href="http://www.ietf.org/rfc/rfc6546.txt">
+  RID Transport protocol</a> or the 
+  <a href="/tools/add_incoming_message">add incoming message tool</a>.</li>
+  <li>The backend system polls messages from the incoming message store using
+      /msg/incoming/pull. The RID Agent does not have the ability to push
+      incoming RID Messages. Incoming RID Messages must be pulled from the queue.
+      </li>
+  <li>The backend system parses the incoming RID Message and generates a response
+      RID Message. The backend system is responsible for understanding the context
+      of the RID Message.</li>
+  <li>The backend system posts a response RID Message (if necessary)
+      to the outgoing message queue.</li>
+  <li>The RID Agent communicates the response RID Message to the target</li>
+</ol>
+</p>
+<p>
+<b>Send</b><br>
+The workflow for sending a RID Message is as follows:
+<ol>
+   <li>A RID Message is created by the backend system and 
+       is inserted into the outgoing mesage store through
+       the Web API</li>
+   <li>The RID Agent sends the RID Message to the appropriate target.</li>
+</ol>
+</p>
+<h2><a name="incoming">Incoming Messages</a></h2>
+<p>
+Incoming Messages are RID Messages that have been sent to the RID Agent. 
+RID Messages are recieved via the RID Transport protocol or artificially added
+via the <a href="/tools/add_incoming_message">add incoming message tool</a>.
+</p>
+<p>
+Incoming Messages are accessed by using the /msg/incoming/pull or 
+/msg/incoming/view URLs. <b>The pull URL changes the state of the 
+incoming message store</b>. The view URL does not. The pull 
+URL is intended for use by systems and the view URL is inteded
+for use by humans using a web browser or by systems testing 
+integration.
+</p>
+<p>HTTP Requests to /msg/incoming/(pull|view) MUST be done with
+an HTTP GET. All other HTTP requests will be denied. Valid queries
+will be responded to with XML by default, or as an HTML table
+if specified. All valid GET parameters are documented in
+/msg/incoming/view. Optionally add a view_type=html GET parameter
+to view the incoming messages as an HTML table.</p>
+
+<p>There is the ability to limit query sizes, which should be used.</p>
+<!-- <h3>Incoming Messages Data Model</h3>
+<p>
+The data model for incoming messages looks like this:
+ <table>
+   <tr>
+    <th>Field Name</th>
+    <th>Description</th>
+    <th>Allowed Values</th>
+   </tr>
+ </table>
+</p> -->
+
+<p>Here are two URLs that should get you going. Change 'view' to 'pull' when you are ready to 
+pull messages from the queue rather than just viewing them.
+<ul>
+<li><a href="/msg/incoming/view?status=new&limit=10">/msg/incoming/view?status=new&limit=10</a></li>
+<li><a href="/msg/incoming/view?status=new&limit=10&view_type=html">/msg/incoming/view?status=new&limit=10&view_type=html</a></li>
+</ul>
+</p>
+
+<h2><a name="outgoing">Outgoing Messages</a></h2>
+<p>
+Outgoing Messages are RID Messages that are to be sent to peers that 
+implement the RID protocol. The outgoing messages store keeps messages
+ that have been successfully sent for later viewing. Outgoing messages
+are sent to the RID Agent by using the /msg/outgoing/push URL. The
+ outgoing message store can be viewed by using the /msg/outgoing/view URL.
+</p>
+
+{% endblock %}
+

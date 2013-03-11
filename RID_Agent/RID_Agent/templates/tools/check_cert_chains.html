@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Certificate Chain Checker Tool{% endblock %}
+{% block header %}Certificate Chain Checker Tool{% endblock %}
+{% block content %}
+This tool analyzes the certificates in the database and attempts to identify
+any errors that may exist. Specifically, this page shows you which certificate issuers
+are not in the database (via the 'Issuer In Database?' field) and which certificate issuers are not valid
+(via the 'Issuer Valid' field).<br><br>
+If any row has 'Issuer In Database?' = False, that means that the issuer for that certificate is not in the
+database and therefore any client attempting to authenticate with that certificate will fail.<br><br>
+If any row has 'Issuer Valid?' = False, that means that there is a problem with the issuer's signing of the
+certificate and the client will not be able to authenticate.<br>
+<a href="/admin/RID_Agent/certificate/">Click here to view certificates</a>
+<br><br>
+<table border="5">
+  <tr>
+    <th>Title</th>
+    <th>Subject</th>
+    <th>Issuer</th>
+    <th>Expired?</th>
+    <th>Issuer in Database?</th>
+    <!-- <th>Issuer Valid?</th> -->
+  <tr>
+  {% for key, value in chain_data.items %}
+  <tr>
+   <td> {{ value.title }} </td>
+   <td> <a href="/admin/RID_Agent/certificate/{{ value.id }}/"> {{ value.subject }} </a></td>
+   <td> {{ value.issuer }} </td>
+   <td> {{ value.expired }} </td>
+   <td> <font 
+         {% if not value.issuer_in_db %} color="red"
+	 {% else %} color="black"
+         {% endif %} >
+	 {{ value.issuer_in_db }}
+       </font>
+   </td>
+   <!-- Check not implemented yet <td> {{ value.issuer_valid }} </td> -->
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

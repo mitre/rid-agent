@@ -1,0 +1,57 @@
+<html>
+	<title>Get request maker</title>
+	<head>
+		<script type="text/javascript">
+		<!--
+		<!-- based on the form values, generate the query_string part of the url
+		function populate_query_string()
+		{
+			var paramArray = new Array();
+			var param_elts = document.forms['params'].elements
+			
+			for(x = 0; x < param_elts.length; x++)
+			{
+				if(param_elts[x].type != "text")
+					continue;
+			
+				if(param_elts[x].value != "")
+					paramArray[param_elts[x].name] = param_elts[x].value
+			}
+			
+			var query_string = "?"
+			
+			for(var key in paramArray)
+				query_string += key + "=" + paramArray[key] + "&"
+			
+			<!-- Chop the last char - easy way of doing it
+			query_string = query_string.substring(0, query_string.length-1)
+			
+			if(query_string == "")
+				query_string = "No params populated"
+			
+			document.forms['query'].elements['query_string'].value = query_string
+			
+		}
+		
+		<!-- goes to there
+		function go_to_there()
+		{
+			window.location = "pull" + document.forms['query'].elements['query_string'].value
+		}
+		-->
+		</script>
+	</head>
+	<body>
+		<form name="params">
+			{% for param in params %}
+				{{ param }}: <input type="text" name="{{ param }}"/><br>
+			{% endfor %}
+			<input type="Button" value="Generate URL" onclick="populate_query_string()"/>
+		</form>
+		<hr>
+		<form action="msg/pull" method="get" name="query">
+			Query String: <input type="text" name="query_string"/>
+			<input type="button" value="Go!" onclick="go_to_there()" />
+		</form>
+	</body>
+</html>

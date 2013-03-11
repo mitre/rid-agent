@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}RID Agent Tools{% endblock %}
+{% block header %}RID Agent Tools{% endblock %}
+
+{% block content %}
+<h2>Overview</h2>
+<p>This section contains an assortment of tools that provide
+mechanisms for interacting with the RID Agent.</p>
+
+<h2>API Tools</h2>
+ <ul>
+<li><a href="/tools/build_incoming_api_query/">Build Incoming Message API Query</a> -
+A tool to help design a query for the Get Incoming Message API Service.</li>
+
+<li><a href="/tools/build_outgoing_api_push">Build Outgoing Message API Push</a> - 
+A tool to help build the POST data for the Push Outgoing Message API Service.</li>
+
+</ul>
+
+<h2>Message Queue Tools</h2>
+<ul>
+ <li><a href="/admin/RID_Agent/incoming_message/add/">Add Incoming Message</a> - 
+Provides a mechanism for adding new RID Messages to the incoming message
+store.</li>
+
+
+ <li><a href="/admin/RID_Agent/outgoing_message/add/">Add Outgoing Message</a> - 
+Provides a mechanism for adding RID Messages to the outgoing message
+store.
+
+ <li><a href="/tools/send_rid_message/">Send RID Message</a> -
+Provides a mechanism for sending an arbitrary RID Message to an 
+arbitrary peer.</li>
+
+<li><a href="/admin/RID_Agent/incoming_message/">View/Delete Incoming Messages</a> - 
+Provides a mechanism for viewing the incoming message store.</li>
+
+ <li><a href="/admin/RID_Agent/outgoing_message/">View/Delete Outgoing Messages</a> - 
+Provides a mechanism for viewing the outgoing message store.</li>
+</ul>
+
+<h2>Other Tools</h2>
+<ul>
+ <li><a href="/tools/check_cert_chains/">Check Certificate Chains</a> - 
+Provides a mechanism to analyze client certificate chains</li>
+</ul>
+
+{% endblock %}

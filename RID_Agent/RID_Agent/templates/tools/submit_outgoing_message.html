@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Add Outgoing Message Result{% endblock %}
+{% block header %}Add Outgoing Message Result{% endblock %}
+{% block content %}
+<h2>Success</h2>
+<p>You have successfully submitted a RID message to the outgoing message store.<br>
+Be warned, if you refresh, you will resubmit this message.<br>
+<a href="/tools/add_outgoing_message">Submit another message</a></p>
+<p>
+<b>Message ID:</b>{{return_code}}<br>
+<b>View this message:</b>
+<a href="/msg/outgoing/view?id={{return_code}}">
+/msg/outgoing/view?id={{return_code}}</a><br>
+<b>Supplied XML:</b><pre>{{supplied_xml}}</pre>
+</p>
+{% endblock %}

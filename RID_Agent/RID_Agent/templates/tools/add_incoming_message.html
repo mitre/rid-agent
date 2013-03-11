@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Add Incoming Messaage Tool{% endblock %}
+{% block header %}Add Incoming Message Tool{% endblock %}
+{% block content %}
+The Add Incoming Message tool allows a user to insert an incoming message to the 
+Incoming Message store manually. The message must be valid RID-IODEF XML. If the
+XML is not well formed or is not RID-IODEF schema valid, you will get an
+error message that is cryptic at best.<br>
+<form action="/tools/add_incoming_message/" method="POST" enctype="text/xml">
+	{% csrf_token %}
+	<table class="form">
+	{% for field in form %}
+	<p>
+        {{ field.label_tag }}: {{ field }}{{ field.errors }}</p>
+	{% endfor %}
+	</table>
+	<input type="submit" value="POST!"/>
+</form>
+{% endblock %}

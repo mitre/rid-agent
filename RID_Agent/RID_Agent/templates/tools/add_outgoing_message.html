@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Add Outgoing Messaage Tool{% endblock %}
+{% block header %}Add Outgoing Message Tool{% endblock %}
+{% block content %}
+The Add Outgoing Message tool allows a user to insert an outgoing message to the 
+Outgoing Message store manually. The message must be valid RID-IODEF XML. If the
+XML is not well formed or is not RID-IODEF schema valid, you will get an
+error message that is cryptic at best.<br>
+<form action="/tools/add_outgoing_message/" method="POST" enctype="text/xml">
+	{% csrf_token %}
+	<table class="form">{{ form }}</table>
+	<input type="submit" value="POST!"/>
+</form>
+{% endblock %}

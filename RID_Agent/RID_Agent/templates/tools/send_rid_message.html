@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Send a RID Message Tool{% endblock %}
+{% block header %}Send a RID Message Tool{% endblock %}
+{% block content %}
+This tool sends a RID Message without using the outgoing
+message queue.
+
+<form action="/tools/send_rid_message/" method="POST">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Send Message"/>
+</form>
+{% endblock %}

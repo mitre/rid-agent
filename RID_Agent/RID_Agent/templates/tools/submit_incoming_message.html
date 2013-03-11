@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Add Incoming Message Result{% endblock %}
+{% block header %}Add Incoming Message Result{% endblock %}
+{% block content %}
+
+{% if success %}
+<h2>Success</h2>
+<p>You have successfully submitted a RID message to the incoming message store.<br>
+If you refresh, you will resubmit this message.<br>
+<a href="/tools/add_incoming_message">Submit another message</a></p>
+<p>
+<b>Message ID:</b>{{return_code}}<br>
+<b>View this message:</b>
+<a href="/msg/incoming/view?id={{return_code}}&view_type=html">
+/msg/incoming/view?id={{return_code}}&view_type=html</a><br>
+<b>Supplied XML:</b><pre>{{supplied_xml}}</pre>
+</p>
+</p>
+{% else %}
+<h2>Failure</h2>
+<p>There was an error submitting the RID Message. Refreshing will resubmit
+this message.<br><br>
+Error message: <br>
+{{return_code}}
+</p>
+{% endif %}
+
+{% endblock %}

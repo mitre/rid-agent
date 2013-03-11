@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Sent a RID Message result{% endblock %}
+{% block header %}Sent a RID Message Result{% endblock %}
+{% block content %}
+
+<h2>
+{% if success == 'True' %}
+<p>The RID Message was successfully sent!</p>
+{% else %}
+<p>The RID Message failed to send!</p>
+{% endif %}
+</h2>
+
+{% if success == 'True' or success == 'False' %}
+<p>The message was sent and received the following HTTP Response information:</p>
+<b>HTTP Version:</b>       {{ message.version }}<br>
+<b>HTTP Status:</b>        {{ message.status }}<br>
+<b>Reason:</b>        {{ message.reason }}<br>
+<b>Message:</b>       {{ message.msg }}<br>
+<b>Response Body:</b> {{ message_body }}<br>
+{% else %}
+There was an error sending the message:<br>
+{{message}}
+{% endif %}
+
+{% endblock %}

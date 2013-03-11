@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}RID Agent Documentation{% endblock %}
+{% block header %}RID Agent Documentation{% endblock %}
+{% block content %}
+<h2> IMPORTANT </h2>
+<p>
+This documentation is quickly becoming obselete. There is an updated
+set of documentation available in a word document. That word document will eventually
+be posted to this area, but not just yet. Do not rely on this information.
+</p>
+<h2>Welcome</h2>
+<p>Welcome to the RID Agent Documentation. This section should provide 
+all the information you need to manage and interact with this system.</p>
+
+<h2>Topics</h2>
+<ul>
+  <li><a href="/docs/architecture/">Architecture</a> - Covers the
+high level architecture of the RID Agent and provides links to more
+detailed information.</li>
+  <li><a href="/docs/references/">References</a> - Covers the items 
+that may be useful for those using, integrating with, or developing
+this system.</li>
+  <li><a href="/docs/web_api_integration/">Web API Integration</a> - 
+Covers the technical details necessary to integrate a backend system with
+the RID Agent (this system)</li>
+</ul>
+{% endblock %}
+{% block sidebar %}
+<ul>
+  <li><a href="/docs/web_api_integration/">Web API Integration</a></li>
+</ul>
+{% endblock %}

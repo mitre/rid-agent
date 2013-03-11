@@ -1,0 +1,42 @@
+<!-- This takes a set of parameters,
+	 makes them text editable, and generates a query_string based
+	 on the supplied parameters (blank parameters are not included.
+	 
+	 When the Go! button is pressed, the user is redirected to 
+	 the specified URL plus the query_string
+	 
+	 This is useful if a page only works in the context of get parameters.
+-->
+{% extends "base.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block header %}{{title}}{% endblock %}
+{% block script_header %}
+	<script type="text/javascript">
+	<!-- goes to there
+	function go_to_there()
+	{
+		window.location = "{{ url }}" + document.forms['query'].elements['query_string'].value
+	}
+	-->
+	</script>
+{% endblock %}
+{% block content %}
+	<p>
+	This page exists to assist in the building a useful 
+	query string for the get incoming message portion of the 
+	API. The form will generate the
+	GET parameters, and you can then click "Go!" to run
+	the query against the API.</p>
+	<p>
+	<form name="params" method="get" action="/tools/build_incoming_api_query/">
+		{{ form.as_p }}
+		<input type="Submit" value="Validate & Generate URL"/>
+	</form>
+	</p>
+	<p>
+	<form name="query">
+		Query String: <input type="text" name="query_string" value="{{ query_string }}"/>
+		<input type="button" value="Go!" onclick="go_to_there()" /><br>
+	</form>
+	</p>
+{% endblock %}

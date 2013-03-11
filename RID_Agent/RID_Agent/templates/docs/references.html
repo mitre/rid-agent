@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}RID Agent References {% endblock %}
+{% block header %}RID Agent References{% endblock %}
+{% block content %}
+<h2>Normative References</h2>
+<ul>
+  <li><a href="http://www.ietf.org/rfc/rfc6546.txt">RFC 6546 - RID Transport</a> - Covers the 
+transmission of RID messages over HTTP/TLS</li>
+  <li><a href="http://www.ietf.org/rfc/rfc6545.txt">RFC 6545 - RID</a> - Covers the format
+of RID Messages</li>
+  <li><a href="http://tools.ietf.org/html/rfc5070">RFC 5070 - IODEF</a> - Covers the format
+of IODEF (Incident Object Descrition Exchange Format) messages.</li>
+</ul>
+<h2>XML Schemas</h2>
+These are not the official schemas. They are slightly modified
+for use in the RID Agent.
+<ul>
+  <li><a href="{{STATIC_URL}}xsd/iodef-1.0.xsd">IODEF Schema</a></li>
+  <li><a href="{{STATIC_URL}}xsd/iodef-rid-2.0.xsd">RID-IODEF Schema</a></li>
+  <li><a href="{{STATIC_URL}}xsd/xmldsig-core-schema.xsd">XML DSIG Core Schema</a></li>
+</ul>
+{% endblock %}

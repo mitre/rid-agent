@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Outgoing Message API Push{% endblock %}
+{% block header %}Outgoing Message API Push{% endblock %}
+
+{% block content %}
+	<p>
+	This page exists to assist in the building of useful POST data
+	for the outgoing message push portion of the 
+	API.</p>
+	<p>
+	<form name="params" method="POST" action="/tools/build_outgoing_api_push/">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="Submit" value="Validate & Generate Post Data"/>
+	</form>
+	</p>
+	<hr>
+	<p>
+	Post Data: <textarea cols="50" rows="10">{{ post_data }}</textarea>
+	</p>
+{% endblock %}
